@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="txtUUID1" type="id" />
+    <item name="txtMajor1" type="id" />
+    <item name="txtMinor1" type="id" />
+    <item name="txtRssi1" type="id" />
+    <item name="txtUUID2" type="id" />
+    <item name="txtMajor2" type="id" />
+    <item name="txtMinor2" type="id" />
+    <item name="txtRssi2" type="id" />
+</resources>
