@@ -33,6 +33,16 @@ public class Activity2 extends Activity {
 
     }
 
+    public void ranging(View view){
+        Intent intent2= new Intent(this, Ranging.class);
+        startActivity(intent2);
+
+    }
+
+    public void monitor(View view) {
+        Intent intent3 = new Intent(this, Monitor.class);
+        startActivity(intent3);
+    }
     //public void NavigationFragmentDrawer(View view) {
       //  Intent navigationDrawerFragment = new Intent(this, .class);
         //startActivity(navigationDrawerFragment);

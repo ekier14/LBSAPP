@@ -50,7 +50,7 @@ public class Monitor extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ranging);
+        setContentView(R.layout.activity_monitor);
 
 
         // ---get references to all the views in the

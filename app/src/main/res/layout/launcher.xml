@@ -21,7 +21,7 @@
         android:onClick="camera"
         android:text="@string/camera"
         style="@style/btnStyleSandrift"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="125dp"
         android:layout_centerHorizontal="true"/>
 
 
@@ -32,10 +32,22 @@
         android:layout_height="75dp"
         android:layout_width="210dp"
         android:layout_centerHorizontal="true"
-        android:onClick="AllDemos"
+        android:onClick="ranging"
         android:text="Locate Beacons"
         style="@style/btnStyleSandrift"
-        android:layout_marginTop="290dp"/>
+        android:layout_marginTop="200dp"/>
+
+    <Button
+
+        android:id="@+id/monitorBeacon"
+        android:layout_height="75dp"
+        android:layout_width="210dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:onClick="monitor"
+        android:text="Monitor Beacons"
+        style="@style/btnStyleSandrift"
+        android:layout_marginTop="305dp"/>
 
     <TextView
         android:id="@+id/textView1"
@@ -58,7 +70,7 @@
         android:text="@string/map"
         android:textStyle="bold"
         style="@style/btnStyleSandrift"
-        android:layout_marginTop="430dp"
+        android:layout_marginTop="410dp"
         android:layout_centerHorizontal="true"/>
 
 
