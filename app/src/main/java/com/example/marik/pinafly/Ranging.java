@@ -119,7 +119,7 @@ public class Ranging extends Monitor {
                                                                             "Cannot start ranging", e);
                                                                 }
                                                             } else {
-                                                                postNotification("Entered region");
+                                                              postNotification("Entered region");
                                                             }
                                                         }
 
@@ -132,8 +132,12 @@ public class Ranging extends Monitor {
                                                                         "Exited region",
                                                                         Toast.LENGTH_LONG).show();
                                                             } else {
-                                                                postNotification("Exited region");
+                                                            postNotification("Exited region");
                                                             }
+
+
+
+
 
                                                             //---stop ranging for beacons---
                                                             try {

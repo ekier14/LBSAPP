@@ -101,6 +101,15 @@ public class Monitor extends Activity {
                                                                         getApplicationContext(),
                                                                         "Entered region",
                                                                         Toast.LENGTH_LONG).show();
+
+                                                                //---range for beacons---
+                                                                try {
+                                                                    beaconManager.startRanging(
+                                                                            ALL_ESTIMOTE_BEACONS);
+                                                                } catch (RemoteException e) {
+                                                                    Log.e(TAG,
+                                                                            "Cannot start ranging", e);
+                                                                }
                                                             } else {
                                                                 postNotification("Entered region");
                                                             }
@@ -117,9 +126,132 @@ public class Monitor extends Activity {
                                                             } else {
                                                                 postNotification("Exited region");
                                                             }
+
+                                                            //---stop ranging for beacons---
+                                                            try {
+                                                                beaconManager.stopRanging(
+                                                                        ALL_ESTIMOTE_BEACONS);
+                                                            } catch (RemoteException e) {
+                                                                Log.e(TAG,
+                                                                        e.getLocalizedMessage());
+                                                            }
+
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    //---clear the second group of
+                                                                    // EditText fields---
+                                                                    txtUUID2.setText("");
+                                                                    txtMajor2.setText("");
+                                                                    txtMinor2.setText("");
+                                                                    txtRssi2.setText("");
+
+                                                                    //---clear the first group of
+                                                                    // EditText fields---
+                                                                    txtUUID1.setText("");
+                                                                    txtMajor1.setText("");
+                                                                    txtMinor1.setText("");
+                                                                    txtRssi1.setText("");
+                                                                }
+                                                            });
                                                         }
                                                     });
+
+        //---called when beacons are found---
+        beaconManager.setRangingListener(new
+                                                 BeaconManager.RangingListener() {
+                                                     @Override public void onBeaconsDiscovered(
+                                                             Region region, final List<Beacon> beacons)
+                                                     {
+                                                         Log.d(TAG, "Ranged beacons: " +
+                                                                 beacons);
+
+                                                         runOnUiThread(new Runnable() {
+                                                             @Override
+                                                             public void run() {
+                                                                 if (beacons.size() > 0) {
+                                                                     Beacon iBeacon1 = null,
+                                                                             iBeacon2 = null;
+                                                                     //---get the first
+                                                                     // iBeacon---
+                                                                     iBeacon1 = beacons.get(0);
+
+                                                                     if (beacons.size()>1) {
+                                                                         //---get the second
+                                                                         // iBeacon---
+                                                                         iBeacon2 =
+                                                                                 beacons.get(1);
+                                                                     }
+                                                                     //---first iBeacon---
+                                                                     txtUUID1.setText(
+                                                                             iBeacon1.
+                                                                                     getProximityUUID().
+                                                                                     toString());
+                                                                     txtMajor1.setText(
+                                                                             String.valueOf(
+                                                                                     iBeacon1.getMajor()));
+                                                                     txtMinor1.setText(
+                                                                             String.valueOf(
+                                                                                     iBeacon1.getMinor()));
+                                                                     txtRssi1.setText(
+                                                                             String.valueOf(
+                                                                                     iBeacon1.getRssi()));
+
+                                                                     if (iBeacon2!=null) {
+                                                                         //---second iBeacon-
+                                                                         txtUUID2.setText(
+                                                                                 iBeacon2.
+                                                                                         getProximityUUID().
+                                                                                         toString());
+                                                                         txtMajor2.setText(
+                                                                                 String.valueOf(
+                                                                                         iBeacon2.
+                                                                                                 getMajor()));
+                                                                         txtMinor2.setText(
+                                                                                 String.valueOf(
+                                                                                         iBeacon2.
+                                                                                                 getMinor()));
+                                                                         txtRssi2.setText(
+                                                                                 String.valueOf(
+                                                                                         iBeacon2.
+                                                                                                 getRssi()));
+                                                                     } else {
+                                                                         //---clear the second
+                                                                         // group of EditText
+                                                                         // fields---
+                                                                         txtUUID2.setText("");
+                                                                         txtMajor2.setText("");
+                                                                         txtMinor2.setText("");
+                                                                         txtRssi2.setText("");
+                                                                     }
+                                                                 } else {
+                                                                     //---clear the first group
+                                                                     // of EditText fields---
+                                                                     txtUUID1.setText("");
+                                                                     txtMajor1.setText("");
+                                                                     txtMinor1.setText("");
+                                                                     txtRssi1.setText("");
+                                                                 }
+                                                             }
+                                                         });
+                                                     }
+                                                 });
     }
+
+    //---stop ranging for beacons when activity is killed---
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            beaconManager.stopRanging(
+                    ALL_ESTIMOTE_BEACONS);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Cannot stop", e);
+        }
+    }
+
+
+
 
     @Override
     protected void onStart() {

@@ -39,7 +39,7 @@
     <string name="title_activity_image_pick_avtivity">ImagePickAvtivity</string>
     <string name="Capture">Capture</string>
     <string name="tap">Tap Me</string>
-    <string name="camera">camera</string>
+    <string name="camera">Camera</string>
     <string name="title_activity_ranging">RangingActivity</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="title_section1">Section 1</string>
